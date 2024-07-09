@@ -14,6 +14,7 @@ public class Main {
                 Strategy.TWO_PLATOONS,
                 Strategy.THREE_PLATOONS,
                 Strategy.FOUR_PLATOONS
+
         );
 
         double[][] winRates = new double[strategies.size()][strategies.size()];
@@ -48,14 +49,12 @@ public class Main {
             for (int j = 0; j < strategies.size(); j++) {
                 if (winRates[i][j] > maxWinRate) {
                     maxWinRate = winRates[i][j];
-                    bestStrategyIndex1 = i + 1;
-                    bestStrategyIndex2 = j + 1;
+                    bestStrategyIndex1 = i ;
+                    bestStrategyIndex2 = j;
                 }
             }
         }
 
-
-        // Минимальная разница в эффективности.
         double minDifference = Double.MAX_VALUE;
         int minDiffStrategy1 = -1;
         int minDiffStrategy2 = -1;
@@ -71,11 +70,14 @@ public class Main {
         }
 
         System.out.println("Матрица вероятностей победы:");
-        for (double[] row : winRates) {
-            System.out.println(Arrays.toString(row));
+        for (int i = 0; i < winRates.length; i++) {
+            for (int j = 0; j < winRates[i].length; j++) {
+                System.out.printf("%.2f ", winRates[i][j]);
+            }
+            System.out.println();
         }
 
-        System.out.println("Комбинация стратегий, при которой вероятность победы одной из команд максимальная: " + bestStrategyIndex1 + " " + bestStrategyIndex2);
+        System.out.println("Комбинация стратегий, при которой вероятность победы одной из команд максимальная: " + bestStrategyIndex1 + " против " + bestStrategyIndex2);
         System.out.println("Винрейт этой команды: " + maxWinRate);
         System.out.println("Минимальная разница в эффективности у стратегий: " + minDiffStrategy1 + " и " + minDiffStrategy2);
         System.out.println("И сама минимальная разница: " + minDifference);
